@@ -1,28 +1,22 @@
 name: Deploy to GitHub Pages
-
 on:
   push:
-    branches:
-      - master
-
+    branches: [ master ]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v3
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
-
+          node-version: '18'
       - name: Install dependencies
-        run: npm ci --ignore-scripts
-
+        run: npm install
       - name: Build
         run: npm run build
-
+        env:
+          ROLLUP_SKIP_NODEJS_CHECK: true
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
