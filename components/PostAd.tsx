@@ -191,6 +191,24 @@ const PostAd: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 ))}
               </div>
 
+              <div className="bg-white rounded-2xl border border-[#E9E9E7] p-4 shadow-sm group hover:border-[#C25E72]/30 transition-all mb-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#F0F0EF] flex items-center justify-center text-[#1C1C1B]/40 group-hover:text-[#C25E72] transition-all">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[9px] font-bold text-[#1C1C1B]/30 uppercase tracking-widest mb-0.5">Ville ou Quartier</p>
+                    <input 
+                      type="text" 
+                      placeholder="Ex: Paris 11e..." 
+                      className="text-[15px] text-[#1C1C1B] bg-transparent outline-none w-full font-bold placeholder:text-[#37352F]/10" 
+                      value={formData.location} 
+                      onChange={(e) => setFormData({...formData, location: e.target.value})} 
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="bg-white rounded-2xl border border-[#E9E9E7] divide-y divide-[#F0F0EF] shadow-sm overflow-hidden mb-4">
                 <div className="flex items-center gap-4 p-4 hover:bg-[#FAFAFA] transition-colors group">
                   <div className="w-10 h-10 rounded-xl bg-[#F0F0EF] flex items-center justify-center text-[#1C1C1B]/40 group-hover:text-[#C25E72] transition-all">
@@ -208,24 +226,6 @@ const PostAd: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                   <div className="flex-1">
                     <p className="text-[9px] font-bold text-[#1C1C1B]/30 uppercase tracking-widest mb-0.5">Retour</p>
                     <input type="date" className="text-[15px] text-[#1C1C1B] bg-transparent outline-none w-full font-bold" value={formData.endDate} onChange={(e) => setFormData({...formData, endDate: e.target.value})} />
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-[#E9E9E7] p-4 shadow-sm group hover:border-[#C25E72]/30 transition-all">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#F0F0EF] flex items-center justify-center text-[#1C1C1B]/40 group-hover:text-[#C25E72] transition-all">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[9px] font-bold text-[#1C1C1B]/30 uppercase tracking-widest mb-0.5">Ville ou Quartier</p>
-                    <input 
-                      type="text" 
-                      placeholder="Ex: Paris 11e..." 
-                      className="text-[15px] text-[#1C1C1B] bg-transparent outline-none w-full font-bold placeholder:text-[#37352F]/10" 
-                      value={formData.location} 
-                      onChange={(e) => setFormData({...formData, location: e.target.value})} 
-                    />
                   </div>
                 </div>
               </div>

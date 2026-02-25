@@ -13,7 +13,7 @@ interface BookingDropdownProps {
 
 const BookingDropdown: React.FC<BookingDropdownProps> = ({ onClose, onDatesSelected }) => {
   const [overlayState, setOverlayState] = useState<OverlayState>('search');
-  const [activeSection, setActiveSection] = useState<ActiveSection>('dates');
+  const [activeSection, setActiveSection] = useState<ActiveSection>('location');
   const [dateSubTab, setDateSubTab] = useState<DateSubTab>('dates');
   
   // Form State
@@ -279,36 +279,9 @@ const BookingDropdown: React.FC<BookingDropdownProps> = ({ onClose, onDatesSelec
 
       <div className="flex-1 overflow-y-auto no-scrollbar px-5 py-4 pb-28 space-y-5 bg-[#FAFAFA]">
         
-        {/* QUAND - SOLID CARD */}
-        <div className={`transition-all duration-300 overflow-hidden shadow-sm border ${activeSection === 'dates' ? 'bg-white rounded-[24px] border-[#E9E9E7] p-5 shadow-lg' : 'bg-white rounded-xl p-4 flex items-center justify-between border-[#E9E9E7] cursor-pointer hover:border-[#C25E72]/30'}`}
-             onClick={() => activeSection !== 'dates' && setActiveSection('dates')}>
-          {activeSection === 'dates' ? (
-            <>
-              <h2 className="text-[11px] font-bold text-[#37352F]/40 mb-4 tracking-[0.1em] uppercase">Quand ?</h2>
-              <div className="bg-[#F0F0EF] p-1 rounded-lg flex mb-5 w-full border border-[#E9E9E7]">
-                {['dates', 'flexible'].map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={(e) => { e.stopPropagation(); setDateSubTab(tab as DateSubTab); }}
-                    className={`flex-1 py-2 rounded-md text-[11px] font-bold transition-all ${dateSubTab === tab ? 'bg-[#1C1C1B] text-white shadow-sm' : 'text-[#37352F]/40 hover:text-[#37352F]'}`}
-                  >
-                    {tab === 'dates' ? 'Dates' : 'Flexible'}
-                  </button>
-                ))}
-              </div>
-              {dateSubTab === 'dates' ? renderDatesTab() : renderFlexibleTab()}
-            </>
-          ) : (
-            <>
-              <span className="text-[12px] font-bold text-[#37352F]/40 uppercase tracking-widest">Quand</span>
-              <span className="text-[13px] font-bold text-[#1C1C1B]">{startDate && endDate ? `${startDate.getDate()} - ${endDate.getDate()} ${startDate.toLocaleDateString('fr-FR', { month: 'short' })}` : "Ajouter dates"}</span>
-            </>
-          )}
-        </div>
-
         {/* OÙ - SOLID CARD */}
-        <div className={`transition-all duration-300 overflow-hidden shadow-sm border ${activeSection === 'location' ? 'bg-white rounded-[24px] border-[#E9E9E7] p-5 shadow-lg' : 'bg-white rounded-xl p-4 flex items-center justify-between border-[#E9E9E7] cursor-pointer hover:border-[#C25E72]/30'} ${!areDatesValid() ? 'opacity-50 pointer-events-none grayscale' : ''}`}
-             onClick={() => areDatesValid() && activeSection !== 'location' && setActiveSection('location')}>
+        <div className={`transition-all duration-300 overflow-hidden shadow-sm border ${activeSection === 'location' ? 'bg-white rounded-[24px] border-[#E9E9E7] p-5 shadow-lg' : 'bg-white rounded-xl p-4 flex items-center justify-between border-[#E9E9E7] cursor-pointer hover:border-[#C25E72]/30'}`}
+             onClick={() => activeSection !== 'location' && setActiveSection('location')}>
           {activeSection === 'location' ? (
             <>
               <h2 className="text-[11px] font-bold text-[#37352F]/40 mb-4 tracking-[0.1em] uppercase">Où ?</h2>
@@ -368,16 +341,6 @@ const BookingDropdown: React.FC<BookingDropdownProps> = ({ onClose, onDatesSelec
                   </div>
                 ))}
               </div>
-
-              <div className="mt-5 p-4 bg-white rounded-lg border border-[#E9E9E7] animate-in fade-in slide-in-from-top-2 duration-400 shadow-md">
-                <div className="flex justify-between items-center">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold text-[#37352F]/40 uppercase tracking-[0.2em]">Total estimé</span>
-                    <span className="text-[12px] font-medium text-[#37352F]/60 italic">{priceDetails.label}</span>
-                  </div>
-                  <span className="text-[20px] font-bold text-[#C25E72] tracking-tighter">{priceDetails.total}€</span>
-                </div>
-              </div>
             </>
           ) : (
             <>
@@ -387,9 +350,36 @@ const BookingDropdown: React.FC<BookingDropdownProps> = ({ onClose, onDatesSelec
           )}
         </div>
 
+        {/* QUAND - SOLID CARD */}
+        <div className={`transition-all duration-300 overflow-hidden shadow-sm border ${activeSection === 'dates' ? 'bg-white rounded-[24px] border-[#E9E9E7] p-5 shadow-lg' : 'bg-white rounded-xl p-4 flex items-center justify-between border-[#E9E9E7] cursor-pointer hover:border-[#C25E72]/30'}`}
+             onClick={() => activeSection !== 'dates' && setActiveSection('dates')}>
+          {activeSection === 'dates' ? (
+            <>
+              <h2 className="text-[11px] font-bold text-[#37352F]/40 mb-4 tracking-[0.1em] uppercase">Quand ?</h2>
+              <div className="bg-[#F0F0EF] p-1 rounded-lg flex mb-5 w-full border border-[#E9E9E7]">
+                {['dates', 'flexible'].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={(e) => { e.stopPropagation(); setDateSubTab(tab as DateSubTab); }}
+                    className={`flex-1 py-2 rounded-md text-[11px] font-bold transition-all ${dateSubTab === tab ? 'bg-[#1C1C1B] text-white shadow-sm' : 'text-[#37352F]/40 hover:text-[#37352F]'}`}
+                  >
+                    {tab === 'dates' ? 'Dates' : 'Flexible'}
+                  </button>
+                ))}
+              </div>
+              {dateSubTab === 'dates' ? renderDatesTab() : renderFlexibleTab()}
+            </>
+          ) : (
+            <>
+              <span className="text-[12px] font-bold text-[#37352F]/40 uppercase tracking-widest">Quand</span>
+              <span className="text-[13px] font-bold text-[#1C1C1B]">{startDate && endDate ? `${startDate.getDate()} - ${endDate.getDate()} ${startDate.toLocaleDateString('fr-FR', { month: 'short' })}` : "Ajouter dates"}</span>
+            </>
+          )}
+        </div>
+
         {/* VOTRE CHAT - SOLID CARD */}
-        <div className={`transition-all duration-300 overflow-hidden shadow-sm border ${activeSection === 'pet' ? 'bg-white rounded-[24px] border-[#E9E9E7] p-5 shadow-lg' : 'bg-white rounded-xl p-4 flex items-center justify-between border-[#E9E9E7] cursor-pointer hover:border-[#C25E72]/30'} ${!areDatesValid() || !isLocationValid() ? 'opacity-50 pointer-events-none grayscale' : ''}`}
-             onClick={() => areDatesValid() && isLocationValid() && activeSection !== 'pet' && setActiveSection('pet')}>
+        <div className={`transition-all duration-300 overflow-hidden shadow-sm border ${activeSection === 'pet' ? 'bg-white rounded-[24px] border-[#E9E9E7] p-5 shadow-lg' : 'bg-white rounded-xl p-4 flex items-center justify-between border-[#E9E9E7] cursor-pointer hover:border-[#C25E72]/30'} ${!isLocationValid() ? 'opacity-50 pointer-events-none grayscale' : ''}`}
+             onClick={() => isLocationValid() && activeSection !== 'pet' && setActiveSection('pet')}>
           {activeSection === 'pet' ? (
             <>
               <h2 className="text-[11px] font-bold text-[#37352F]/40 mb-4 tracking-[0.1em] uppercase">Votre Chat</h2>
@@ -423,6 +413,16 @@ const BookingDropdown: React.FC<BookingDropdownProps> = ({ onClose, onDatesSelec
                     <span className="uppercase tracking-widest text-[#37352F]/60">Pucé(e)</span>
                     <div className={`w-4 h-4 rounded-full border-2 transition-all ${isChipped ? 'bg-[#1C1C1B] border-[#1C1C1B]' : 'border-[#E9E9E7]'}`} />
                   </button>
+                </div>
+              </div>
+
+              <div className="mt-5 p-4 bg-white rounded-lg border border-[#E9E9E7] animate-in fade-in slide-in-from-top-2 duration-400 shadow-md">
+                <div className="flex justify-between items-center">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold text-[#37352F]/40 uppercase tracking-[0.2em]">Total estimé</span>
+                    <span className="text-[12px] font-medium text-[#37352F]/60 italic">{priceDetails.label}</span>
+                  </div>
+                  <span className="text-[20px] font-bold text-[#C25E72] tracking-tighter">{priceDetails.total}€</span>
                 </div>
               </div>
             </>

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Carousel from './components/Carousel';
 import HowItWorks from './components/HowItWorks';
 import SitterList from './components/SitterList';
@@ -8,7 +8,6 @@ import OwnerTestimonials from './components/OwnerTestimonials';
 import FAQSection from './components/FAQSection';
 import SmartCTA from './components/SmartCTA';
 import TrustBar from './components/TrustBar';
-import ServicesNav from './components/ServicesNav';
 import SitterRegistration from './components/SitterRegistration';
 import PostAd from './components/PostAd';
 import OwnerDashboard from './components/OwnerDashboard';
@@ -42,7 +41,7 @@ export type ViewState = 'home' | 'register-sitter' | 'lead_capture' | 'owner_das
 
 const Header: React.FC<{ onAction: (intent: 'login' | 'join') => void, onViewChange: (v: ViewState) => void }> = ({ onAction, onViewChange }) => {
   return (
-    <header className="sticky top-0 bg-[#FAFAFA]/95 backdrop-blur-md border-b border-[#E9E9E7] z-50 px-6 lg:px-12 py-3.5 flex items-center justify-between w-full shadow-[0_1px_10px_rgba(0,0,0,0.02)]">
+    <header className="hidden md:flex sticky top-0 bg-[#FAFAFA]/95 backdrop-blur-md border-b border-[#E9E9E7] z-50 px-6 lg:px-12 py-3.5 items-center justify-between w-full shadow-[0_1px_10px_rgba(0,0,0,0.02)]">
       <div className="flex items-center gap-2 cursor-pointer group" onClick={() => onViewChange('home')}>
         <SnoutLogo className="w-7 h-7 transition-transform group-hover:scale-110" />
         <span className="font-bold text-[14px] tracking-tight text-[#37352F]">Neko</span>
@@ -77,62 +76,48 @@ const Header: React.FC<{ onAction: (intent: 'login' | 'join') => void, onViewCha
   );
 };
 
-const MobileBottomNav: React.FC<{ onViewChange: (view: ViewState) => void, currentView: ViewState }> = ({ onViewChange, currentView }) => {
+const MobileBottomNav: React.FC<{ onViewChange: (view: ViewState) => void, currentView: ViewState, onAction: (intent: 'login' | 'join') => void }> = ({ onViewChange, currentView, onAction }) => {
   const isActive = (view: ViewState) => currentView === view;
 
   return (
-    <div className="md:hidden fixed bottom-6 left-0 right-0 px-5 z-[100] pointer-events-none">
-      <nav className="max-w-[340px] mx-auto h-[58px] bg-white/50 backdrop-blur-2xl border border-white/40 rounded-[24px] shadow-[0_15px_45px_-10px_rgba(0,0,0,0.15)] flex items-center justify-around px-2 pointer-events-auto overflow-hidden ring-1 ring-black/[0.02]">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[100] pointer-events-auto">
+      <nav className="w-full h-[64px] bg-white border-t border-[#E9E9E7] flex items-center justify-around px-2 shadow-[0_-4px_12px_rgba(0,0,0,0.03)]">
         
         <button 
-          onClick={() => onViewChange('home')}
-          className={`relative flex flex-col items-center justify-center flex-1 h-full transition-all duration-300 active:scale-90 ${isActive('home') ? 'text-[#C25E72]' : 'text-[#1C1C1B]/40'}`}
+          className={`relative flex flex-col items-center justify-center flex-1 h-full transition-all duration-300 active:scale-95 text-[#1C1C1B]/40`}
         >
-          <div className={`p-1 rounded-xl transition-all duration-500 ${isActive('home') ? 'scale-110' : 'bg-transparent'}`}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-          </div>
-          <span className={`text-[7px] font-extrabold uppercase tracking-[0.1em] mt-0.5 transition-all duration-300 ${isActive('home') ? 'opacity-100' : 'opacity-60'}`}>Accueil</span>
-        </button>
-
-        <button 
-          className={`relative flex flex-col items-center justify-center flex-1 h-full transition-all duration-300 active:scale-90 text-[#1C1C1B]/40`}
-        >
-          <div className="p-1 rounded-xl transition-all duration-500">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <div className="p-1 transition-all duration-500">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8" />
               <line x1="21" x2="16.65" y2="16.65" />
             </svg>
           </div>
-          <span className="text-[7px] font-extrabold uppercase tracking-[0.1em] mt-0.5 opacity-60">Explorer</span>
+          <span className="text-[8px] font-bold uppercase tracking-[0.05em] mt-0.5 opacity-60">Explorer</span>
         </button>
 
         <button 
-          onClick={() => onViewChange('messages')}
-          className={`relative flex flex-col items-center justify-center flex-1 h-full transition-all duration-300 active:scale-90 ${isActive('messages') ? 'text-[#C25E72]' : 'text-[#1C1C1B]/40'}`}
+          onClick={() => onViewChange('lead_capture')}
+          className={`relative flex flex-col items-center justify-center flex-1 h-full transition-all duration-300 active:scale-95 text-[#1C1C1B]/40`}
         >
-          <div className={`p-1 rounded-xl transition-all duration-500 ${isActive('messages') ? 'scale-110' : 'bg-transparent'}`}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          <div className="p-1 transition-all duration-500">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 5v14M5 12h14" />
             </svg>
-            <div className="absolute top-2 right-4 w-1.5 h-1.5 bg-[#C25E72] rounded-full border border-white ring-2 ring-[#C25E72]/10"></div>
           </div>
-          <span className={`text-[7px] font-extrabold uppercase tracking-[0.1em] mt-0.5 transition-all duration-300 ${isActive('messages') ? 'opacity-100' : 'opacity-60'}`}>Chat</span>
+          <span className="text-[8px] font-bold uppercase tracking-[0.05em] mt-0.5 opacity-60">List my ad</span>
         </button>
 
         <button 
-          onClick={() => onViewChange('owner_dashboard')}
-          className={`relative flex flex-col items-center justify-center flex-1 h-full transition-all duration-300 active:scale-90 ${isActive('owner_dashboard') ? 'text-[#C25E72]' : 'text-[#1C1C1B]/40'}`}
+          onClick={() => onAction('login')}
+          className={`relative flex flex-col items-center justify-center flex-1 h-full transition-all duration-300 active:scale-95 text-[#1C1C1B]/40`}
         >
-          <div className={`p-1 rounded-xl transition-all duration-500 ${isActive('owner_dashboard') ? 'scale-110' : 'bg-transparent'}`}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <div className={`p-1 transition-all duration-500`}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
           </div>
-          <span className={`text-[7px] font-extrabold uppercase tracking-[0.1em] mt-0.5 transition-all duration-300 ${isActive('owner_dashboard') ? 'opacity-100' : 'opacity-60'}`}>Profil</span>
+          <span className={`text-[8px] font-bold uppercase tracking-[0.05em] mt-0.5 transition-all duration-300 opacity-60`}>Log in</span>
         </button>
 
       </nav>
@@ -147,6 +132,29 @@ const App: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [selectedSitterId, setSelectedSitterId] = useState<string | null>(null);
+  const [isSticky, setIsSticky] = useState(false);
+  
+  const heroSearchRef = useRef<HTMLDivElement>(null);
+
+  // Intersection Observer for sticky search bar
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsSticky(!entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: '-80px 0px 0px 0px' }
+    );
+
+    if (heroSearchRef.current) {
+      observer.observe(heroSearchRef.current);
+    }
+
+    return () => {
+      if (heroSearchRef.current) {
+        observer.unobserve(heroSearchRef.current);
+      }
+    };
+  }, [viewState]);
 
   // Correction cruciale : Défilement instantané vers le haut lors du changement de vue
   useEffect(() => {
@@ -220,36 +228,79 @@ const App: React.FC = () => {
 
     return (
       <>
-        <section className="w-full px-6 lg:px-12 pt-4">
-          <div className="relative w-full h-[220px] md:h-[480px] mb-6 shadow-xl group">
-            <div className="absolute inset-0 rounded-[32px] md:rounded-[48px] overflow-hidden">
+        <section className="w-full px-4 lg:px-8 pt-2 md:pt-10 mx-auto max-w-[360px] md:max-w-none" ref={heroSearchRef}>
+          <div className="relative w-full overflow-hidden rounded-[32px] bg-white shadow-2xl border border-[#E9E9E7]">
+            {/* Zone 1 – Hero photo */}
+            <div className="relative w-full h-[220px] md:h-[480px]">
               <img 
                 src="https://images.unsplash.com/photo-1548247416-ec66f4900b2e?q=80&w=1600&auto=format&fit=crop" 
-                className="w-full h-full object-cover object-[center_40%] group-hover:scale-[1.03] transition-transform duration-[4000ms]"
+                className="w-full h-full object-cover object-[center_40%]"
                 alt="Cat"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+              
+              <div className="absolute bottom-6 left-6 right-6 z-10">
+                <h1 className="font-hero !text-white leading-[1.1] tracking-tight mb-2 drop-shadow-lg">
+                  <span className="block text-[24px] md:text-[48px] font-bold">Confiez-le à un</span>
+                  <span className="block text-[24px] md:text-[48px] font-bold">voisin de confiance</span>
+                </h1>
+                
+                <div className="flex items-center gap-2 text-white text-[11px] md:text-[13px] font-medium">
+                  <div className="flex -space-x-1.5">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <img
+                        key={i}
+                        src={`https://picsum.photos/seed/cat-avatar-${i}/64/64`}
+                        alt="Cat"
+                        className="w-4 h-4 md:w-5 md:h-5 rounded-full border border-white/30 object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    ))}
+                  </div>
+                  24 chats gardés aujourd'hui à Paris
+                </div>
+              </div>
             </div>
-            
-            <div className="relative h-full flex flex-col justify-end p-6 md:p-16 z-10">
-              <h1 className="font-hero text-[22px] md:text-[52px] font-bold text-white leading-tight tracking-tight mb-6 drop-shadow-2xl max-w-2xl">
-                Rejoignez la communauté <span className="scribble-underline italic font-normal text-[#F9F9F8]">parisian cat lover</span>
-              </h1>
-              <SmartCTA onTrigger={() => setViewState('lead_capture')} onSearchStateChange={setIsSearchActive} />
+
+            {/* Zone 2 – Panel blanc */}
+            <div className="p-4 md:p-6 bg-white space-y-4 md:space-y-6">
+              <div className="relative flex items-center bg-[#F3F3F2] rounded-xl border border-[#E9E9E7] p-1 pr-1 shadow-sm">
+                <div className="pl-3 text-[#37352F]/40">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </div>
+                <input 
+                  type="text" 
+                  placeholder="Déposez une demande de garde"
+                  className="flex-1 bg-transparent border-none outline-none px-2 text-[13px] font-medium text-[#37352F] placeholder:text-[#37352F]/30"
+                  onClick={() => setViewState('lead_capture')}
+                  readOnly
+                />
+                <button className="w-8 h-8 bg-[#C25E72] rounded-lg flex items-center justify-center text-white shadow-sm hover:bg-[#A34D5E] transition-colors">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+              </div>
+
+              <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
+                {[
+                  { id: 'boarding', label: '🐾 Garde' },
+                  { id: 'visit', label: 'Visites' },
+                  { id: 'housesitting', label: 'Home Sitting' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => handleServiceClick(tab.id as PricingTabType)}
+                    className={`px-3 py-1.5 rounded-full text-[12px] font-bold transition-all whitespace-nowrap border ${
+                      activePricingTab === tab.id 
+                        ? 'bg-[#C25E72]/5 border-[#C25E72]/20 text-[#C25E72]' 
+                        : 'bg-transparent border-transparent text-[#37352F]/40 hover:text-[#37352F]'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-
-          <div className="flex flex-col items-center text-center pt-6 pb-2 max-w-xl mx-auto animate-section">
-            <MagnifyingEyeIcon />
-            <h2 className="text-[16px] md:text-[20px] font-bold text-[#1C1C1B] tracking-tight mb-1">
-              Le réseau local de confiance pour vos chats
-            </h2>
-            <p className="text-[12px] md:text-[14px] text-[#37352F]/60 font-medium leading-relaxed italic max-w-md">
-              Neko vous connecte avec des voisins vérifiés. Bienveillants, fiables et juste à côté de chez vous.
-            </p>
-          </div>
-
-          <ServicesNav onServiceClick={handleServiceClick} activeTab={activePricingTab} />
         </section>
 
         <main className="w-full px-6 lg:px-12 mt-4 pb-4 md:pb-0">
@@ -257,12 +308,14 @@ const App: React.FC = () => {
             <section id="listings" className="space-y-6 animate-section">
               <div className="flex items-center justify-between">
                 <h2 className="text-[18px] md:text-[22px] font-bold text-[#1C1C1B] tracking-tight">Demandes en cours</h2>
-                <span className="text-[10px] font-bold text-[#37352F]/40 uppercase tracking-widest bg-[#F0F0EF] px-3 py-1 rounded-full shadow-sm">{MOCK_LISTINGS.length} disponibles</span>
               </div>
               <Carousel />
             </section>
             <HowItWorks />
-            <SitterList onSitterClick={handleSitterClick} />
+            <section className="space-y-6">
+              <h2 className="text-[18px] md:text-[22px] font-bold text-[#1C1C1B] tracking-tight">Nos sitters à proximité</h2>
+              <SitterList onSitterClick={handleSitterClick} />
+            </section>
             <section className="bg-white border border-[#E9E9E7] rounded-[40px] p-6 shadow-xl">
               <TrustBar />
             </section>
@@ -277,6 +330,22 @@ const App: React.FC = () => {
 
   return (
     <div className={`min-h-screen bg-[#FAFAFA] w-full selection:bg-[#C25E72]/20 ${(viewState === 'lead_capture' || viewState === 'role_selection' || isSearchActive || isAuthModalOpen) ? 'overflow-hidden h-screen' : ''}`}>
+      {/* Sticky Search Bar */}
+      <div className={`fixed top-0 left-0 right-0 z-[60] bg-white shadow-md transform transition-transform duration-300 ease-in-out px-4 py-3 md:px-12 ${isSticky && viewState === 'home' && !isSearchActive ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className="max-w-7xl mx-auto flex items-center gap-4">
+          <div className="hidden md:block cursor-pointer" onClick={() => setViewState('home')}>
+            <SnoutLogo className="w-8 h-8" />
+          </div>
+          <div className="flex-1 max-w-2xl">
+            <SmartCTA onTrigger={() => setViewState('lead_capture')} onSearchStateChange={setIsSearchActive} />
+          </div>
+          <div className="hidden md:flex items-center gap-4">
+            <button onClick={() => handleActionClick('login')} className="text-[12px] font-bold text-[#37352F]/70 hover:text-black">Log in</button>
+            <button onClick={() => handleActionClick('join')} className="btn-primary px-4 py-2 text-[11px]">Join</button>
+          </div>
+        </div>
+      </div>
+
       {viewState !== 'owner_dashboard' && viewState !== 'sitter_dashboard' && viewState !== 'messages' && viewState !== 'role_selection' && !isSearchActive && (
         <Header onAction={handleActionClick} onViewChange={setViewState} />
       )}
@@ -291,7 +360,7 @@ const App: React.FC = () => {
       />
 
       {viewState !== 'lead_capture' && viewState !== 'role_selection' && !isSearchActive && (
-        <MobileBottomNav onViewChange={setViewState} currentView={viewState} />
+        <MobileBottomNav onViewChange={setViewState} currentView={viewState} onAction={handleActionClick} />
       )}
 
       {viewState === 'lead_capture' && (
@@ -301,16 +370,24 @@ const App: React.FC = () => {
       {viewState !== 'owner_dashboard' && viewState !== 'sitter_dashboard' && viewState !== 'messages' && viewState !== 'role_selection' && !isSearchActive && (
         <footer className="bg-[#1C1C1B] border-t border-[#C25E72]/20 pt-10 pb-12 w-full px-6 lg:px-12 mt-4 md:mt-0">
           <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8">
-            <div className="col-span-1 md:col-span-2 space-y-4">
+            <div className="col-span-1 md:col-span-2 space-y-6">
               <div className="flex items-center gap-2">
-                <div className="p-1 rounded-lg ring-1 ring-[#C25E72]/30 bg-black/20">
-                  <SnoutLogo className="w-8 h-8" />
+                <div className="p-1.5 rounded-lg ring-1 ring-[#C25E72]/30 bg-black/20">
+                  <SnoutLogo className="w-12 h-12" />
                 </div>
                 <span className="font-bold text-[18px] tracking-tight text-white">Neko Community</span>
               </div>
               <p className="text-[12px] text-white/50 max-w-[300px] leading-relaxed font-medium">
                 Le réseau parisien le plus fiable pour les propriétaires et sitters de chats. Rejoignez des milliers de voisins vérifiés.
               </p>
+              <div className="md:hidden pt-2">
+                <button 
+                  onClick={() => handleActionClick('join')}
+                  className="btn-primary w-full py-4 text-[14px] shadow-xl"
+                >
+                  Join Neko
+                </button>
+              </div>
             </div>
             <div className="space-y-3">
               <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Plateforme</h4>

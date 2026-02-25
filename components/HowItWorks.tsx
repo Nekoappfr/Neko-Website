@@ -47,20 +47,23 @@ const HowItWorks: React.FC = () => {
 
   return (
     <div className="w-full py-4">
-      <h2 className="text-[18px] md:text-[24px] font-bold text-[#1C1C1B] mb-12 tracking-tight text-center">
+      <h2 className="text-[18px] md:text-[24px] font-bold text-[#1C1C1B] mb-2 tracking-tight text-center">
         How it works
       </h2>
+      <p className="text-[13px] md:text-[15px] text-[#37352F]/60 font-medium text-center mb-12">
+        Neko est la première communauté de pet sitting de confiance entre voisins à Paris.
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24">
         {steps.map((step, i) => (
-          <div key={i} className="flex flex-col items-center text-center group">
-            <div className="mb-6 relative flex items-center justify-center w-16 h-16 rounded-[28px] bg-[#F3F3F2] group-hover:bg-[#E9E9E7] transition-colors shadow-sm">
+          <div key={i} className="flex flex-col items-center text-center group bg-white border border-[#E9E9E7] rounded-[32px] p-8 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="mb-6 relative flex items-center justify-center w-16 h-16 rounded-[24px] bg-[#F3F3F2] group-hover:bg-[#E9E9E7] transition-colors shadow-sm">
                <step.Illustration />
                <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border border-[#E9E9E7] flex items-center justify-center text-[11px] font-bold text-[#1C1C1B]/40 shadow-sm">
                  0{i+1}
                </div>
             </div>
             
-            <div className="space-y-2 px-4 lg:px-8">
+            <div className="space-y-2">
               <h3 className="text-[15px] md:text-[17px] font-bold text-[#1C1C1B] tracking-tight group-hover:text-[#C25E72] transition-colors">
                 {step.title}
               </h3>

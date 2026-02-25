@@ -42,33 +42,33 @@ interface PricingSectionProps {
 
 const PricingSection: React.FC<PricingSectionProps> = ({ activeTab, setActiveTab }) => {
   const plans: Record<PricingTabType, Plan> = {
-    visit: { 
-      tabLabel: "Drop-in Visit",
-      title: "Drop-in Visits", 
-      price: "13€", 
-      unit: "visit", 
-      desc: "A neighbor comes to play, feed, and cuddle your cat directly at your home. Ideal for cats who prefer staying in their familiar environment.",
-      icon: <PriceIconDropIn />,
-      cta: "Select Visits"
-    },
     boarding: { 
-      tabLabel: "Pet Boarding",
-      title: "Host Family", 
+      tabLabel: "Garde chez le pet-sitter",
+      title: "Famille d'accueil", 
       price: "13€", 
-      unit: "night", 
-      desc: "Your cat stays with a passionate neighbor. A warm and family atmosphere for a completely peaceful vacation.",
+      unit: "nuit", 
+      desc: "Votre chat séjourne chez un voisin passionné. Une ambiance chaleureuse et familiale pour des vacances en toute sérénité.",
       icon: <PriceIconBoarding />,
-      cta: "Select Boarding",
+      cta: "Choisir la Garde",
       popular: true
     },
+    visit: { 
+      tabLabel: "Visites",
+      title: "Visites à domicile", 
+      price: "13€", 
+      unit: "visite", 
+      desc: "Un voisin vient jouer, nourrir et câliner votre chat directement chez vous. Idéal pour les chats qui préfèrent rester dans leur environnement familier.",
+      icon: <PriceIconDropIn />,
+      cta: "Choisir les Visites"
+    },
     housesitting: { 
-      tabLabel: "House sitting",
-      title: "House Sitting", 
-      price: "Free*", 
-      unit: "day", 
-      desc: "The sitter moves into your home while you're away. Your cat keeps their habits and your house is monitored.",
+      tabLabel: "Home Sitting",
+      title: "Home Sitting", 
+      price: "Gratuit*", 
+      unit: "jour", 
+      desc: "Le sitter s'installe chez vous pendant votre absence. Votre chat garde ses habitudes et votre maison est surveillée.",
       icon: <PriceIconSitting />,
-      cta: "Select House Sitting"
+      cta: "Choisir le Home Sitting"
     }
   };
 
