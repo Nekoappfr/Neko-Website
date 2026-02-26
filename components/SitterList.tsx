@@ -36,7 +36,7 @@ const SitterList: React.FC<SitterListProps> = ({ onSitterClick }) => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-70 group-hover:opacity-90"></div>
               
               <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-10 flex items-center justify-between gap-1.5">
-                <h3 className="text-[14px] md:text-[15px] font-semibold text-white leading-[1.333] tracking-tighter truncate flex-1">
+                <h3 className="text-[14px] md:text-[15px] font-semibold text-white leading-[1.333] tracking-tighter truncate flex-1 drop-shadow-md">
                   {sitter.name}
                 </h3>
                 <div className="flex items-center gap-1 bg-white/20 backdrop-blur-md px-2 py-0.5 rounded-lg flex-shrink-0 border border-white/20">
