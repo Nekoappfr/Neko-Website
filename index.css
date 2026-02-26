@@ -4,4 +4,10 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-hero: "Libre Baskerville", serif;
   --font-serif-display: "Fraunces", serif;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  --animate-float: float 3s ease-in-out infinite;
 }

@@ -53,15 +53,16 @@ const OwnerDashboard: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
   const renderDashboard = () => (
     <div className="flex-1 p-6 md:p-8 animate-in fade-in duration-500">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-[20px] font-bold text-[#1C1C1B] tracking-tight">Vos Annonces en cours</h2>
+        <h2 className="text-[19px] md:text-[22px] font-semibold text-[#222222] leading-[1.25] tracking-tight">Vos Annonces en cours</h2>
         <button className="btn-primary text-[11px] py-2 px-5">Nouvelle annonce</button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {ads.map((ad) => (
-          <div key={ad.id} className="bg-white border border-[#E9E9E7] rounded-2xl overflow-hidden hover:shadow-md transition-all group flex flex-col">
+          <div key={ad.id} className="bg-white border border-[#E9E9E7] rounded-[12px] overflow-hidden hover:shadow-md transition-all group flex flex-col">
             <div className="relative h-40">
               <img src={ad.image} className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500" alt={ad.petName} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
               <div className="absolute top-3 left-3 flex gap-2">
                 <span className={`px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-widest ${
                   ad.status === 'active' ? 'bg-green-500 text-white' : 'bg-[#1C1C1B] text-white'
@@ -69,13 +70,15 @@ const OwnerDashboard: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
                   {ad.status}
                 </span>
               </div>
+              <div className="absolute bottom-3 left-3">
+                <h3 className="text-[14px] md:text-[15px] font-semibold text-white leading-[1.333] drop-shadow-md">{ad.petName}</h3>
+              </div>
             </div>
             <div className="p-4 space-y-3 flex-1">
               <div className="flex items-center justify-between">
-                <h3 className="text-[16px] font-bold text-[#1C1C1B]">{ad.petName}</h3>
-                <span className="text-[11px] font-bold text-[#37352F]/40">{ad.dates}</span>
+                <span className="text-[13px] font-bold text-[#717171]">{ad.dates}</span>
               </div>
-              <p className="text-[11px] font-medium text-[#37352F]/60 flex items-center gap-1.5">
+              <p className="text-[14px] font-bold text-[#222222] leading-[1.5] flex items-center gap-1.5">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 {ad.location}
               </p>
@@ -86,7 +89,7 @@ const OwnerDashboard: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
                       <img key={i} src={`https://i.pravatar.cc/100?u=cand${ad.id}${i}`} className="w-5 h-5 rounded-full border border-white" />
                     ))}
                   </div>
-                  <span className="text-[10px] font-bold text-[#1C1C1B]/40 uppercase tracking-widest">
+                  <span className="text-[12px] font-semibold text-[#717171] leading-[1.33] uppercase tracking-widest">
                     {ad.applicantsCount} Candidats
                   </span>
                 </div>

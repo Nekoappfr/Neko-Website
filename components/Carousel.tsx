@@ -5,7 +5,7 @@ import PetCard from './PetCard';
 const Carousel: React.FC = () => {
   return (
     <div className="relative w-full overflow-hidden">
-      <div className="horizontal-scroll-container no-scrollbar py-2 gap-4 md:gap-8 lg:gap-10">
+      <div className="horizontal-scroll-container no-scrollbar py-2 gap-2.5 md:gap-8 lg:gap-10">
         {MOCK_LISTINGS.map((listing) => (
           <PetCard 
             key={listing.id} 

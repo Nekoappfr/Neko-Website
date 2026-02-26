@@ -47,10 +47,10 @@ const HowItWorks: React.FC = () => {
 
   return (
     <div className="w-full py-4">
-      <h2 className="text-[18px] md:text-[24px] font-bold text-[#1C1C1B] mb-2 tracking-tight text-center">
+      <h2 className="text-[19px] md:text-[22px] font-semibold text-[#222222] leading-[1.25] mb-2 tracking-tight text-center">
         How it works
       </h2>
-      <p className="text-[13px] md:text-[15px] text-[#37352F]/60 font-medium text-center mb-12">
+      <p className="text-[13px] text-[#717171] font-normal text-center mb-12">
         Neko est la première communauté de pet sitting de confiance entre voisins à Paris.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24">
@@ -64,10 +64,10 @@ const HowItWorks: React.FC = () => {
             </div>
             
             <div className="space-y-2">
-              <h3 className="text-[15px] md:text-[17px] font-bold text-[#1C1C1B] tracking-tight group-hover:text-[#C25E72] transition-colors">
+              <h3 className="text-[14px] md:text-[15px] font-semibold text-[#222222] leading-[1.333] tracking-tight group-hover:text-[#C25E72] transition-colors">
                 {step.title}
               </h3>
-              <p className="text-[13px] text-[#37352F]/60 leading-relaxed font-medium">
+              <p className="text-[14px] text-[#222222] leading-[1.5] font-normal">
                 {step.desc}
               </p>
             </div>

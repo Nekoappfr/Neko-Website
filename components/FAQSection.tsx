@@ -18,7 +18,7 @@ const FAQItem = ({ q, a }: { q: string, a: string }) => {
         onClick={() => setOpen(!open)} 
         className="w-full py-5 flex items-center justify-between text-left group transition-all"
       >
-        <span className="text-[14px] md:text-[16px] font-bold text-[#1C1C1B] group-hover:text-[#C25E72] transition-colors tracking-tight">
+        <span className="text-[14px] md:text-[15px] font-semibold text-[#222222] group-hover:text-[#C25E72] transition-colors tracking-tight leading-[1.333]">
           {q}
         </span>
         <div className={`flex items-center justify-center w-6 h-6 rounded-full bg-[#F0F0EF] transition-all duration-300 ${open ? 'rotate-45 bg-[#C25E72]/10' : ''}`}>
@@ -27,7 +27,7 @@ const FAQItem = ({ q, a }: { q: string, a: string }) => {
       </button>
       {open && (
         <div className="pb-6 animate-in fade-in slide-in-from-top-2 duration-400">
-          <p className="text-[13px] md:text-[14px] text-[#37352F]/70 leading-relaxed font-medium max-w-[620px]">
+          <p className="text-[14px] text-[#222222] leading-[1.5] font-normal max-w-[620px]">
             {a}
           </p>
         </div>
@@ -42,10 +42,10 @@ const FAQSection: React.FC = () => {
       <div className="flex flex-col md:flex-row gap-8 md:gap-16">
         <div className="w-full md:w-1/3">
           <FAQDoodle />
-          <h2 className="text-[18px] md:text-[22px] font-bold text-[#1C1C1B] mb-3 tracking-tight leading-tight">
+          <h2 className="text-[19px] md:text-[22px] font-semibold text-[#222222] leading-[1.25] mb-3 tracking-tight">
             Frequently Asked <br /> Questions
           </h2>
-          <p className="text-[12px] md:text-[13px] text-[#37352F]/50 font-medium leading-relaxed">
+          <p className="text-[13px] text-[#717171] font-normal">
             Everything you need to know about <br /> Neko's community and safety.
           </p>
         </div>

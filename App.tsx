@@ -80,8 +80,8 @@ const MobileBottomNav: React.FC<{ onViewChange: (view: ViewState) => void, curre
   const isActive = (view: ViewState) => currentView === view;
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[100] pointer-events-auto">
-      <nav className="w-full h-[64px] bg-white border-t border-[#E9E9E7] flex items-center justify-around px-2 shadow-[0_-4px_12px_rgba(0,0,0,0.03)]">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[100] pointer-events-auto px-4 pb-4">
+      <nav className="w-full h-[64px] bg-white/80 backdrop-blur-xl border border-[#E9E9E7]/50 flex items-center justify-around px-2 shadow-[0_8px_32px_rgba(0,0,0,0.08)] rounded-[24px]">
         
         <button 
           className={`relative flex flex-col items-center justify-center flex-1 h-full transition-all duration-300 active:scale-95 text-[#1C1C1B]/40`}
@@ -142,7 +142,7 @@ const App: React.FC = () => {
       ([entry]) => {
         setIsSticky(!entry.isIntersecting);
       },
-      { threshold: 0, rootMargin: '-80px 0px 0px 0px' }
+      { threshold: 0, rootMargin: '-120px 0px 0px 0px' }
     );
 
     if (heroSearchRef.current) {
@@ -229,94 +229,92 @@ const App: React.FC = () => {
     return (
       <>
         <section className="w-full px-4 lg:px-8 pt-2 md:pt-10 mx-auto max-w-[360px] md:max-w-none" ref={heroSearchRef}>
-          <div className="relative w-full overflow-hidden rounded-[32px] bg-white shadow-2xl border border-[#E9E9E7]">
+          <div className="relative w-full overflow-hidden rounded-[32px] shadow-2xl border border-[#E9E9E7]">
             {/* Zone 1 – Hero photo */}
-            <div className="relative w-full h-[220px] md:h-[480px]">
+            <div className="relative w-full h-[340px] md:h-[520px]">
               <img 
                 src="https://images.unsplash.com/photo-1548247416-ec66f4900b2e?q=80&w=1600&auto=format&fit=crop" 
                 className="w-full h-full object-cover object-[center_40%]"
                 alt="Cat"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
               
-              <div className="absolute bottom-6 left-6 right-6 z-10">
-                <h1 className="font-hero !text-white leading-[1.1] tracking-tight mb-2 drop-shadow-lg">
-                  <span className="block text-[24px] md:text-[48px] font-bold">Confiez-le à un</span>
-                  <span className="block text-[24px] md:text-[48px] font-bold">voisin de confiance</span>
+              <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 z-10 flex flex-col gap-3 md:gap-6">
+                <h1 className="font-hero !text-white leading-[1.2] tracking-tight drop-shadow-lg">
+                  <span className="block text-[26px] md:text-[40px] font-semibold">Confiez-le à un</span>
+                  <span className="block text-[26px] md:text-[40px] font-semibold">voisin de confiance</span>
                 </h1>
+
+                <div className="max-w-[480px]">
+                  <SmartCTA onTrigger={() => setViewState('lead_capture')} onSearchStateChange={setIsSearchActive} />
+                </div>
                 
-                <div className="flex items-center gap-2 text-white text-[11px] md:text-[13px] font-medium">
-                  <div className="flex -space-x-1.5">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <img
-                        key={i}
-                        src={`https://picsum.photos/seed/cat-avatar-${i}/64/64`}
-                        alt="Cat"
-                        className="w-4 h-4 md:w-5 md:h-5 rounded-full border border-white/30 object-cover"
-                        referrerPolicy="no-referrer"
-                      />
-                    ))}
-                  </div>
-                  24 chats gardés aujourd'hui à Paris
+                <div className="flex gap-1.5 overflow-x-auto no-scrollbar w-full md:w-fit">
+                  {[
+                    { id: 'boarding', label: 'Garde chez le pet-sitter' },
+                    { id: 'visit', label: 'Visites' },
+                    { id: 'housesitting', label: 'Home Sitting' }
+                  ].map((tab) => (
+                    <button
+                      key={tab.id}
+                      onClick={() => handleServiceClick(tab.id as PricingTabType)}
+                      className={`px-2.5 py-1 md:px-3.5 md:py-1.5 rounded-lg text-[9px] md:text-[11px] font-bold transition-all whitespace-nowrap border backdrop-blur-sm ${
+                        activePricingTab === tab.id 
+                          ? 'bg-white/20 border-white text-white shadow-sm' 
+                          : 'bg-black/5 border-white/10 text-white/60 hover:text-white hover:bg-white/10'
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Zone 2 – Panel blanc */}
-            <div className="p-4 md:p-6 bg-white space-y-4 md:space-y-6">
-              <div className="relative flex items-center bg-[#F3F3F2] rounded-xl border border-[#E9E9E7] p-1 pr-1 shadow-sm">
-                <div className="pl-3 text-[#37352F]/40">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </div>
-                <input 
-                  type="text" 
-                  placeholder="Déposez une demande de garde"
-                  className="flex-1 bg-transparent border-none outline-none px-2 text-[13px] font-medium text-[#37352F] placeholder:text-[#37352F]/30"
-                  onClick={() => setViewState('lead_capture')}
-                  readOnly
-                />
-                <button className="w-8 h-8 bg-[#C25E72] rounded-lg flex items-center justify-center text-white shadow-sm hover:bg-[#A34D5E] transition-colors">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </button>
-              </div>
-
-              <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
-                {[
-                  { id: 'boarding', label: '🐾 Garde' },
-                  { id: 'visit', label: 'Visites' },
-                  { id: 'housesitting', label: 'Home Sitting' }
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => handleServiceClick(tab.id as PricingTabType)}
-                    className={`px-3 py-1.5 rounded-full text-[12px] font-bold transition-all whitespace-nowrap border ${
-                      activePricingTab === tab.id 
-                        ? 'bg-[#C25E72]/5 border-[#C25E72]/20 text-[#C25E72]' 
-                        : 'bg-transparent border-transparent text-[#37352F]/40 hover:text-[#37352F]'
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
+          <div className="flex flex-col items-center justify-center mt-8 mb-16">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-[#E9E9E7] shadow-[0_4px_20px_rgba(0,0,0,0.04)] animate-float">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i} className="relative">
+                    <img
+                      src={`https://picsum.photos/seed/cat-avatar-${i}/64/64`}
+                      alt="Cat"
+                      className="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-white object-cover shadow-sm"
+                      referrerPolicy="no-referrer"
+                    />
+                    {i === 1 && (
+                      <span className="absolute bottom-0 right-0 w-2 h-2 bg-emerald-500 border border-white rounded-full animate-pulse"></span>
+                    )}
+                  </div>
                 ))}
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] md:text-[12px] font-bold text-[#37352F] leading-tight">
+                  24 chats gardés aujourd'hui
+                </span>
+                <span className="text-[8px] md:text-[10px] font-medium text-[#37352F]/40 uppercase tracking-wider">
+                  Communauté Parisienne • En direct
+                </span>
               </div>
             </div>
           </div>
         </section>
 
-        <main className="w-full px-6 lg:px-12 mt-4 pb-4 md:pb-0">
+        <main className="w-full px-4 md:px-6 lg:px-12 pb-4 md:pb-0">
           <div className="space-y-20">
             <section id="listings" className="space-y-6 animate-section">
               <div className="flex items-center justify-between">
-                <h2 className="text-[18px] md:text-[22px] font-bold text-[#1C1C1B] tracking-tight">Demandes en cours</h2>
+                <h2 className="text-[19px] md:text-[22px] font-semibold text-[#222222] leading-[1.25] tracking-tight">Demandes en cours</h2>
               </div>
               <Carousel />
             </section>
             <HowItWorks />
             <section className="space-y-6">
-              <h2 className="text-[18px] md:text-[22px] font-bold text-[#1C1C1B] tracking-tight">Nos sitters à proximité</h2>
+              <h2 className="text-[19px] md:text-[22px] font-semibold text-[#222222] leading-[1.25] tracking-tight">Nos sitters à proximité</h2>
               <SitterList onSitterClick={handleSitterClick} />
             </section>
-            <section className="bg-white border border-[#E9E9E7] rounded-[40px] p-6 shadow-xl">
+            <section className="bg-white border border-[#E9E9E7] rounded-[40px] p-4 md:p-6 shadow-xl">
               <TrustBar />
             </section>
             <PricingSection activeTab={activePricingTab} setActiveTab={setActivePricingTab} />
@@ -331,17 +329,17 @@ const App: React.FC = () => {
   return (
     <div className={`min-h-screen bg-[#FAFAFA] w-full selection:bg-[#C25E72]/20 ${(viewState === 'lead_capture' || viewState === 'role_selection' || isSearchActive || isAuthModalOpen) ? 'overflow-hidden h-screen' : ''}`}>
       {/* Sticky Search Bar */}
-      <div className={`fixed top-0 left-0 right-0 z-[60] bg-white shadow-md transform transition-transform duration-300 ease-in-out px-4 py-3 md:px-12 ${isSticky && viewState === 'home' && !isSearchActive ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div className={`fixed top-0 left-0 right-0 z-[60] w-full bg-white/80 backdrop-blur-xl border-b border-[#E9E9E7]/50 shadow-md transform transition-all duration-500 ease-in-out px-4 py-2 md:px-12 ${isSticky && viewState === 'home' && !isSearchActive ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
         <div className="max-w-7xl mx-auto flex items-center gap-4">
-          <div className="hidden md:block cursor-pointer" onClick={() => setViewState('home')}>
+          <div className="hidden md:block cursor-pointer hover:scale-110 transition-transform" onClick={() => setViewState('home')}>
             <SnoutLogo className="w-8 h-8" />
           </div>
           <div className="flex-1 max-w-2xl">
             <SmartCTA onTrigger={() => setViewState('lead_capture')} onSearchStateChange={setIsSearchActive} />
           </div>
           <div className="hidden md:flex items-center gap-4">
-            <button onClick={() => handleActionClick('login')} className="text-[12px] font-bold text-[#37352F]/70 hover:text-black">Log in</button>
-            <button onClick={() => handleActionClick('join')} className="btn-primary px-4 py-2 text-[11px]">Join</button>
+            <button onClick={() => handleActionClick('login')} className="text-[12px] font-bold text-[#37352F]/70 hover:text-black transition-colors">Log in</button>
+            <button onClick={() => handleActionClick('join')} className="btn-primary px-5 py-2.5 text-[11px] shadow-sm">Join</button>
           </div>
         </div>
       </div>
@@ -368,7 +366,7 @@ const App: React.FC = () => {
       )}
 
       {viewState !== 'owner_dashboard' && viewState !== 'sitter_dashboard' && viewState !== 'messages' && viewState !== 'role_selection' && !isSearchActive && (
-        <footer className="bg-[#1C1C1B] border-t border-[#C25E72]/20 pt-10 pb-12 w-full px-6 lg:px-12 mt-4 md:mt-0">
+        <footer className="bg-[#1C1C1B] border-t border-[#C25E72]/20 pt-10 pb-12 w-full px-4 md:px-6 lg:px-12 mt-4 md:mt-0">
           <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8">
             <div className="col-span-1 md:col-span-2 space-y-6">
               <div className="flex items-center gap-2">
@@ -377,7 +375,7 @@ const App: React.FC = () => {
                 </div>
                 <span className="font-bold text-[18px] tracking-tight text-white">Neko Community</span>
               </div>
-              <p className="text-[12px] text-white/50 max-w-[300px] leading-relaxed font-medium">
+              <p className="text-[14px] text-white/50 max-w-[300px] leading-[1.5] font-normal">
                 Le réseau parisien le plus fiable pour les propriétaires et sitters de chats. Rejoignez des milliers de voisins vérifiés.
               </p>
               <div className="md:hidden pt-2">

@@ -44,10 +44,10 @@ const TrustBar: React.FC = () => {
   return (
     <div className="py-8">
       <div className="flex flex-col items-center text-center mb-8">
-        <h2 className="text-[16px] md:text-[18px] font-bold text-[#1C1C1B] tracking-tight">
+        <h2 className="text-[19px] md:text-[22px] font-semibold text-[#222222] leading-[1.25] tracking-tight">
           The Serenity Guarantee
         </h2>
-        <p className="text-[10px] text-[#37352F]/40 font-bold uppercase tracking-widest mt-1">
+        <p className="text-[13px] text-[#717171] font-normal mt-1">
           Trust & Safety above all
         </p>
       </div>
@@ -60,10 +60,10 @@ const TrustBar: React.FC = () => {
             </div>
             
             <div className="space-y-1 px-4">
-              <h3 className="text-[13px] md:text-[14px] font-bold text-[#1C1C1B] tracking-tight group-hover:text-[#C25E72] transition-colors">
+              <h3 className="text-[14px] md:text-[15px] font-semibold text-[#222222] leading-[1.333] tracking-tight group-hover:text-[#C25E72] transition-colors">
                 {item.title}
               </h3>
-              <p className="text-[11px] text-[#37352F]/60 leading-relaxed font-medium">
+              <p className="text-[14px] text-[#222222] leading-[1.5] font-normal">
                 {item.desc}
               </p>
             </div>

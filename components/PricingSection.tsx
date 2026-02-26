@@ -77,10 +77,10 @@ const PricingSection: React.FC<PricingSectionProps> = ({ activeTab, setActiveTab
   return (
     <section id="pricing" className="py-4 scroll-mt-24">
       <div className="text-center mb-8">
-        <h2 className="text-[18px] md:text-[22px] font-bold text-[#1C1C1B] tracking-tight">
+        <h2 className="text-[19px] md:text-[22px] font-semibold text-[#222222] leading-[1.25] tracking-tight">
           Transparent pricing
         </h2>
-        <p className="text-[10px] font-bold text-[#37352F]/40 uppercase tracking-widest mt-1">
+        <p className="text-[13px] text-[#717171] font-normal mt-1">
           No hidden fees
         </p>
       </div>
@@ -109,18 +109,18 @@ const PricingSection: React.FC<PricingSectionProps> = ({ activeTab, setActiveTab
           
           <div className="space-y-4">
             <div className="space-y-1">
-              <h3 className="text-[18px] md:text-[20px] font-bold text-[#1C1C1B]">
+              <h3 className="text-[14px] md:text-[15px] font-semibold text-[#222222] leading-[1.333]">
                 {currentPlan.title} — {currentPlan.price}
               </h3>
               <div className="flex items-center justify-center gap-2">
-                <span className="text-[12px] text-[#37352F]/40 font-medium">/{currentPlan.unit}</span>
+                <span className="text-[12px] text-[#717171] font-normal leading-[1.33]">/{currentPlan.unit}</span>
                 {currentPlan.popular && (
-                  <span className="text-[9px] font-bold text-[#C25E72] uppercase tracking-widest bg-[#C25E72]/8 px-2 py-0.5 rounded-full border border-[#C25E72]/20">Recommended</span>
+                  <span className="text-[12px] font-semibold text-[#C25E72] leading-[1.33] uppercase tracking-widest bg-[#C25E72]/8 px-2 py-0.5 rounded-full border border-[#C25E72]/20">Recommended</span>
                 )}
               </div>
             </div>
             
-            <p className="text-[13px] md:text-[14px] text-[#37352F]/70 font-medium leading-relaxed max-w-[480px]">
+            <p className="text-[14px] text-[#222222] font-normal leading-[1.5] max-w-[480px]">
               {currentPlan.desc}
             </p>
             

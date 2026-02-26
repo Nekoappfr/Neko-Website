@@ -96,9 +96,9 @@ const HomeTab = () => {
   return (
     <div style={{ padding: '24px' }}>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontFamily: 'Libre Baskerville, serif', fontSize: '22px', fontWeight: 700, color: '#1C1C1B', margin: 0 }}>Bonjour Marie 👋</h1>
-        <p style={{ fontSize: '14px', color: '#37352F', margin: '4px 0 12px 0' }}>Vous avez 2 gardes cette semaine</p>
-        <span style={{ display: 'inline-block', backgroundColor: '#C25E72', color: 'white', fontSize: '8px', fontWeight: 900, textTransform: 'uppercase', padding: '4px 8px', borderRadius: '4px' }}>3 nouveaux messages</span>
+        <h1 style={{ fontFamily: 'Libre Baskerville, serif', fontSize: '26px', fontWeight: 600, color: '#222222', lineHeight: '1.2', margin: 0 }}>Bonjour Marie 👋</h1>
+        <p style={{ fontSize: '14px', color: '#222222', lineHeight: '1.5', margin: '4px 0 12px 0' }}>Vous avez 2 gardes cette semaine</p>
+        <span style={{ display: 'inline-block', backgroundColor: '#C25E72', color: 'white', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', padding: '4px 10px', borderRadius: '6px' }}>3 nouveaux messages</span>
       </div>
 
       <div style={{ display: 'flex', overflowX: 'auto', gap: '12px', paddingBottom: '16px', margin: '0 -24px 24px -24px', padding: '0 24px' }} className="no-scrollbar">
@@ -108,7 +108,7 @@ const HomeTab = () => {
       </div>
 
       <div style={{ marginBottom: '32px' }}>
-        <h2 style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#1C1C1B', marginBottom: '16px' }}>Prochaine garde</h2>
+        <h2 style={{ fontSize: '19px', fontWeight: 600, lineHeight: '1.25', color: '#222222', marginBottom: '16px' }}>Prochaine garde</h2>
         <div style={{ backgroundColor: 'white', borderRadius: '16px', borderLeft: '3px solid #C25E72', padding: '16px', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
            <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
              <div style={{ position: 'relative' }}>
@@ -116,12 +116,12 @@ const HomeTab = () => {
                <div style={{ position: 'absolute', bottom: -2, right: -2, fontSize: '14px' }}>🐱</div>
              </div>
              <div>
-               <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#1C1C1B', margin: 0 }}>Sophie L.</h3>
-               <p style={{ fontSize: '11px', fontStyle: 'italic', color: '#37352F', margin: 0 }}>Maman de Bella</p>
-               <div style={{ display: 'inline-block', backgroundColor: '#F7ECF0', color: '#C25E72', fontSize: '8px', fontWeight: 900, textTransform: 'uppercase', padding: '2px 6px', borderRadius: '4px', marginTop: '6px' }}>Pension</div>
+               <h3 style={{ fontSize: '14px', fontWeight: 600, lineHeight: '1.333', color: '#222222', margin: 0 }}>Sophie L.</h3>
+               <p style={{ fontSize: '13px', fontWeight: 400, color: '#717171', margin: 0 }}>Maman de Bella</p>
+               <div style={{ display: 'inline-block', backgroundColor: '#F7ECF0', color: '#C25E72', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', padding: '2px 8px', borderRadius: '4px', marginTop: '6px' }}>Pension</div>
              </div>
            </div>
-           <div style={{ fontSize: '12px', fontWeight: 500, color: '#37352F', marginBottom: '16px' }}>
+           <div style={{ fontSize: '14px', fontWeight: 400, color: '#222222', lineHeight: '1.5', marginBottom: '16px' }}>
              15 Jan — 20 Jan (5 nuits)
            </div>
            <div style={{ display: 'flex', gap: '8px' }}>
@@ -133,16 +133,16 @@ const HomeTab = () => {
 
       <div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-          <h2 style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#1C1C1B', margin: 0 }}>Demandes en attente</h2>
-          <span style={{ backgroundColor: '#F0F0EF', padding: '2px 8px', borderRadius: '99px', fontSize: '10px', fontWeight: 700 }}>1</span>
+          <h2 style={{ fontSize: '19px', fontWeight: 600, lineHeight: '1.25', color: '#222222', margin: 0 }}>Demandes en attente</h2>
+          <span style={{ backgroundColor: '#F0F0EF', padding: '2px 10px', borderRadius: '99px', fontSize: '12px', fontWeight: 600, color: '#717171' }}>1</span>
         </div>
         <div style={{ backgroundColor: 'white', border: '1px solid #E9E9E7', borderRadius: '16px', padding: '16px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
             <div>
-              <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#1C1C1B', margin: 0 }}>Marc A. • Max</h3>
-              <p style={{ fontSize: '11px', color: '#37352F', margin: '2px 0' }}>10 Fév - 15 Fév • Visites</p>
+              <h3 style={{ fontSize: '14px', fontWeight: 600, lineHeight: '1.333', color: '#222222', margin: 0 }}>Marc A. • Max</h3>
+              <p style={{ fontSize: '13px', fontWeight: 400, color: '#717171', margin: '2px 0' }}>10 Fév - 15 Fév • Visites</p>
             </div>
-            <div style={{ color: '#E07A3A', fontSize: '11px', fontWeight: 600 }}>Expire dans 18h</div>
+            <div style={{ color: '#E07A3A', fontSize: '12px', fontWeight: 600 }}>Expire dans 18h</div>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>
             <button style={{ flex: 1, backgroundColor: '#C25E72', color: 'white', border: 'none', borderRadius: '8px', padding: '10px', fontSize: '12px', fontWeight: 700 }}>Accepter ✓</button>

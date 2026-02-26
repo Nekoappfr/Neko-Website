@@ -54,7 +54,7 @@ const OwnerTestimonials: React.FC = () => {
       {/* Minimalist Testimonials Section */}
       <div className="flex flex-col">
         <div className="flex items-center gap-4 mb-12">
-          <h2 className="text-[20px] md:text-[24px] font-bold text-[#1C1C1B] tracking-tight">
+          <h2 className="text-[19px] md:text-[22px] font-semibold text-[#222222] leading-[1.25] tracking-tight">
             What the community says
           </h2>
           <div className="h-[1px] flex-1 bg-[#E9E9E7] opacity-50"></div>
@@ -68,7 +68,7 @@ const OwnerTestimonials: React.FC = () => {
             >
               <div className="flex-1">
                 <QuoteDoodle />
-                <p className="text-[13px] md:text-[14px] italic text-[#37352F] font-medium leading-relaxed mb-6 group-hover:text-[#1C1C1B] transition-colors">
+                <p className="text-[14px] italic text-[#222222] font-normal leading-[1.5] mb-6 group-hover:text-[#1C1C1B] transition-colors">
                   "{t.quote}"
                 </p>
               </div>
@@ -80,8 +80,8 @@ const OwnerTestimonials: React.FC = () => {
                   alt={t.author} 
                 />
                 <div className="flex flex-col">
-                  <span className="text-[12px] font-bold text-[#1C1C1B]">{t.author}</span>
-                  <span className="text-[10px] font-bold text-[#37352F]/30 uppercase tracking-widest">Owner of {t.cat}</span>
+                  <span className="text-[12px] font-semibold text-[#222222] leading-[1.33]">{t.author}</span>
+                  <span className="text-[13px] font-normal text-[#717171]">Owner of {t.cat}</span>
                 </div>
               </div>
             </div>
@@ -92,7 +92,7 @@ const OwnerTestimonials: React.FC = () => {
 
       {/* Advisor Section Style */}
       <div className="pt-12">
-        <h2 className="text-[20px] md:text-[24px] font-bold text-[#1C1C1B] mb-12 tracking-tight">
+        <h2 className="text-[19px] md:text-[22px] font-semibold text-[#222222] leading-[1.25] mb-12 tracking-tight">
           Still have a question?
         </h2>
         
@@ -101,7 +101,7 @@ const OwnerTestimonials: React.FC = () => {
             <HeartDoodle />
           </div>
           <div className="flex-1 space-y-6">
-            <p className="text-[15px] md:text-[17px] text-[#37352F] font-medium leading-relaxed max-w-[480px]">
+            <p className="text-[14px] text-[#222222] font-normal leading-[1.5] max-w-[480px]">
               Our team responds within a few hours. <br className="hidden md:block" />
               We're real people.
             </p>
